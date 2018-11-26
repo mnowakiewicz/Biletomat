@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+    <title>Biletomat</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+
+    <!-- scripts -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script>if (window.module) module = window.module;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        /*body {*/
+            /*font-family: 'Abel', sans-serif;*/
+        /*}*/
+
+        #logo-row {
+            margin-bottom: 0px;
+        }
+
+        .btn-large {
+            width: 100%;
+            height: 70px;
+            color: black;
+            font-size: 25px;
+        }
+
+        #steps, #table-payment {
+            padding-right: 30px;
+
+        }
+
+        #table-payment .card {
+            margin: 0 0 0;
+        }
+
+        #steps {
+            padding-top: 30px;
+            font-size: 30px;
+        }
+        img {
+            width: 80%;
+        }
+
+        .card-content {
+            text-align: center;
+        }
+
+        .title-card {
+            font-size: 18px;
+        }
+
+        .second-button {
+            margin-top: 10px;
+        }
+
+        .blue {
+            color: white;
+        }
+
+        .rows-metropolitarny .button-add {
+            margin-top: 10%;
+            margin-left: 5%;
+        }
+
+        .button-add {
+            margin-top: 20%;
+            margin-left: 5%;
+        }
+
+        .button-remove {
+            display: block;
+            margin-left: 5%;
+            margin-top: 20%
+        }
+
+        #button-pay {
+            width: 100%;
+        }
+
+        .rows-zwykly {
+            display: none;
+        }
+
+        .rows-metropolitarny {
+            display: none;
+        }
+
+        .rows-metropolitarny h5 {
+            height: 84px;
+            line-height: 3.5;
+            margin-right: 10px
+        }
+
+        .rows-metropolitarny .row {
+            margin-bottom: 0;
+        }
+
+        #btn-down {
+            margin-top: 80px;
+        }
+
+        tbody th {
+            font-weight: normal;
+        }
+
+        .button-back {
+            margin-top: 40px;
+            margin-left: 10px;
+            width: 80px!important;
+            height: 80px!important;
+        }
+        /*.table-payment {*/
+            /*height: 500px;*/
+        /*}*/
+    </style>
+</head>
+<body class="teal lighten-4">
+    <div class="row" id="logo-row">
+        <div class="col s2">
+            <img src="../imageedit_4_7935784377.png">
+        </div>
+        <div class="col s1 offset-s7">
+            <button class="btn-floating btn-large waves-effect waves-light blue button-back z-depth-3" ><i class="material-icons">keyboard_backspace</i></button>
+        </div>
+        <div class="col s2" id="steps">
+            <div class="card z-depth-5">
+                <div class="card-content">
+                    <p>Krok <b>2/4</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s8">
+            <div class="row" >
+                <div class="col s4 offset-s2">
+                    <button class="btn-large grey lighten-5  waves-effect waves-light z-depth-5" id="btn-zwykły">
+                        ZWYKŁY
+                    </button>
+                    <button class="btn-large grey lighten-5 waves-effect waves-light z-depth-5 second-button" id="btn-normalny">
+                        NORMALNY
+                    </button>
+                </div>
+                <div class="col s4 ">
+                    <button class="btn-large grey lighten-5 waves-effect waves-light z-depth-5" id="btn-metropolitarny">
+                        METROPOLITARNY
+                    </button>
+                    <button class="btn-large grey lighten-5  waves-effect waves-light z-depth-5 second-button" id="btn-ulgowy">
+                        ULGOWY
+                    </button>
+                </div>
+            </div>
+            <!--- ROWS ZWYKLY BILET -->
+            <div class="row cards rows-zwykly">
+                <div class="col s3 offset-s2">
+                    <div class="card z-depth-5">
+                        <div class="card-content" id="ticket-jednoprzejazdowy">
+                            <p class="title-card">Jednoprzejazdowy</p>
+                            <p class="description-card">na linie zwykłe</p>
+                            <h5 class="blue darken-2 z-depth-3 ticket-price">3,20 zł</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" style="display: block" id="btn-add-remove-jednoprzejazdowy">
+                    <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                    <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+                </div>
+                <div class="col s3 ">
+                    <div class="card z-depth-5">
+                        <div class="card-content" id="ticket-1-godzinny">
+                            <p class="title-card">1-godzinny</p>
+                            <p class="description-card">na linie zwykłe</p>
+                            <h5 class="blue darken-2 z-depth-3 ticket-price">3,80 zł</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" style="display: block" id="btn-add-remove-1godzinny">
+                    <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                    <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+                </div>
+            </div>
+            <div class="row cards rows-zwykly">
+                <div class="col s3 offset-s2">
+                    <div class="card z-depth-5">
+                        <div class="card-content" id="ticket-jednoprzejazdowy-nocny">
+                            <p class="title-card">1-godzinny lub jednoprzejazdowy</p>
+                            <p class="description-card">na linie nocne, pośpieszne i zwykłe</p>
+                            <h5 class="blue darken-2 z-depth-3 ticket-price">4,20 zł</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" style="display: block" id="btn-add-remove-jednoprzejazdowy-nocny">
+                    <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                    <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+                </div>
+                <div class="col s3 ">
+                    <div class="card z-depth-5">
+                        <div class="card-content" id="ticket-24-godzinny">
+                            <p class="title-card">24-godzinny</p>
+                            <p class="description-card">na linie nocne, pośpieszne i zwykłe</p>
+                            <h5 class="blue darken-2 z-depth-3 ticket-price">13,00 zł</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" style="display: block" id="btn-add-remove-24-godzinny">
+                    <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                    <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+                </div>
+            </div>
+            <!--- ROWS METROPOLITARNY BILET -->
+            <div class="row cards rows-metropolitarny">
+                <div class="col s1 offset-s1">
+                    <button class="btn-floating grey btn-large waves-effect waves-light z-depth-3" id="btn-up">
+                        <i class="material-icons">keyboard_arrow_up</i>
+                    </button>
+                </div>
+                <div class="col s8">
+                   <div class="row card z-depth-5" id="ticket-metropolitarny-1">
+                       <div class="col s9">
+                           <div class="card-content">
+                               <p class="title-card left-align"></p>
+                               <p class="description-card left-align"></p>
+                           </div>
+                       </div>
+                       <div class="col s3" style="text-align: center;">
+                           <h5 class="blue darken-2 z-depth-3 ticket-price"></h5>
+                       </div>
+                   </div>
+                </div>
+                <div class="col s1" style="display: block" id="btn-add-remove-metropolitarny-1">
+                    <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                    <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+                </div>
+            </div>
+            <div class="row cards rows-metropolitarny">
+                <div class="col s8 offset-s2">
+                    <div class="row card z-depth-5" id="ticket-metropolitarny-2">
+                        <div class="col s9">
+                            <div class="card-content">
+                                <p class="title-card left-align"></p>
+                                <p class="description-card left-align"></p>
+                            </div>
+                        </div>
+                        <div class="col s3" style="text-align: center;">
+                            <h5 class="blue darken-2 z-depth-3 ticket-price">4,20 zł</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" style="display: block" id="btn-add-remove-metropolitarny-2">
+                    <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                    <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+                </div>
+            </div>
+            <div class="row cards rows-metropolitarny">
+                <div class="col s1 offset-s1">
+                    <button class="btn-floating grey btn-large waves-effect waves-light z-depth-3" id="btn-down">
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </button>
+                </div>
+                <div class="col s8">
+                    <div class="row card z-depth-5" id="ticket-metropolitarny-3">
+                        <div class="col s9">
+                            <div class="card-content">
+                                <p class="title-card left-align"></p>
+                                <p class="description-card left-align"></p>
+                            </div>
+                        </div>
+                        <div class="col s3" style="text-align: center;">
+                            <h5 class="blue darken-2 z-depth-3 ticket-price"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" style="display: block" id="btn-add-remove-metropolitarny-3">
+                    <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                    <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s4" id="table-payment">
+            <div class="card z-depth-5">
+                <div class="card-content">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Bilet</th>
+                            <th>Il.</th>
+                            <th>Typ</th>
+                            <th>Cena[zł]</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <button id="button-pay" class="btn-large  blue darken-2 waves-effect waves-light z-depth-5 disabled">ZAPŁAĆ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    var metropolitarnyData = {
+        'ulgowy': {
+            1: {
+                "title": "Jednoprzejazdowy (papierowy)",
+                "description": "na linie zwykłe - obowiązujący w pojazdach:<br>" + "ZTM w Gdańsku, ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'U',
+                "price": 1.80,
+            },
+            2: {
+                "title": "Jednoprzejazdowy",
+                "description": "na linie zwykłe, pośpieszne i nocne - obowiązujący w pojazdach:" + " ZTM w Gdańsku, ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'U',
+                "price": 2.20,
+            },
+            3: {
+                "title": "24 godzinny komunalny",
+                "description": "komunalny obowiązujący w pojazdach:<br>" + "ZTM w Gdańsku, ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'U',
+                "price": 7.50,
+            },
+            4: {
+                "title": "24 godzinny kolejowo-komunalny",
+                "description": "kolejowo-komunalny dwóch organizatorów, obowiązuje w:" + "pociągi: SKM i PR, pojazdy: ZTM Gdańsk, ZKM Gdynia, MZK wejherowo",
+                "value": 0,
+                "type": 'U',
+                "price": 10.00,
+            },
+            5: {
+                "title": "72 godzinny komunalny",
+                "description": "obowiązuje w pojazdach: <br> ZTM Gdańsku i ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'U',
+                "price": 15.00,
+            },
+            6: {
+                "title": "72 godzinny kolejowo-komunalny",
+                "description": "kolejowo-komunalny wszystkich organizatorówje w pociągach SKM i PR oraz w pojazdach: ZTM Gdańsku i ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'U',
+                "price": 23.00,
+            },
+
+        },
+        'normalny': {
+            1: {
+                "title": "Jednoprzejazdowy (papierowy)",
+                "description": "na linie zwykłe - obowiązujący w pojazdach:<br>" + "ZTM w Gdańsku, ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'N',
+                "price": 3.60,
+            },
+            2: {
+                "title": "Jednoprzejazdowy",
+                "description": "na linie zwykłe, pośpieszne i nocne - obowiązujący w pojazdach: " + "ZTM w Gdańsku, ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'N',
+                "price": 4.40,
+            },
+            3: {
+                "title": "24 godzinny komunalny",
+                "description": "komunalny obowiązujący w pojazdach:<br>" + "ZTM w Gdańsku, ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'N',
+                "price": 15.00,
+            },
+            4: {
+                "title": "24 godzinny kolejowo-komunalny",
+                "description": "kolejowo-komunalny dwóch organizatorów, obowiązuje w: " + "pociągi: SKM i PR, pojazdy: ZTM Gdańsk, ZKM Gdynia, MZK wejherowo",
+                "value": 0,
+                "type": 'N',
+                "price": 20.00,
+            },
+            5: {
+                "title": "72 godzinny komunalny",
+                "description": "obowiązuje w pojazdach: <br> ZTM Gdańsku i ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'N',
+                "price": 30.00,
+            },
+            6: {
+                "title": "72 godzinny kolejowo-komunalny",
+                "description": "kolejowo-komunalny wszystkich organizatorówje w pociągach SKM i PR oraz w pojazdach: ZTM Gdańsku i ZKM w Gdyni i MZK Wejherowo",
+                "value": 0,
+                "type": 'N',
+                "price": 46.00,
+            },
+        }
+    }
+    var normlanyOrUlgowy = null;
+    var zwyklyOrMetroplitarny = null;
+    var podsumowanie = [];
+    var metropolitarnyChosenData = {
+        1: metropolitarnyData.ulgowy[1],
+        2: metropolitarnyData.ulgowy[2],
+        3: metropolitarnyData.ulgowy[3]
+    };
+     var ipcRenderer = require('electron').ipcRenderer;
+     var outcome = 0;
+
+
+    $(function () {
+        $('#btn-zwykły, #btn-metropolitarny').click(function () {
+            window.zwyklyOrMetroplitarny =  $(this).attr('id');
+            setSelectedColour($(this));
+            prepareEventsAndFunctions();
+        });
+
+        $('#btn-normalny, #btn-ulgowy').click(function () {
+            window.normlanyOrUlgowy = $(this).attr('id');
+            setSelectedColour($(this));
+            prepareEventsAndFunctions();
+        });
+
+        addTicketEvent();
+        removeTicketEvent();
+        prepareButtonsDownUpEvents();
+        backButtonEvent();
+
+        $('#button-pay').click(function () {
+            if(!$(this).hasClass('disabled')){
+                ipcRenderer.send('tickets:pay', window.outcome);
+            }
+        })
+    });
+
+    function backButtonEvent() {
+        $('.button-back').click(function () {
+            ipcRenderer.send('back:mainWindow');
+        })
+    }
+
+    function prepareButtonsDownUpEvents() {
+
+        $('#btn-up, #btn-down').hide();
+
+        checkUpDownButtonsConditions();
+
+        $('#btn-down').click(function () {
+            for(var i=1; i<3; i++){
+                window.metropolitarnyChosenData[i] = window.metropolitarnyChosenData[i+1];
+            }
+            getAndSetNextItem(window.metropolitarnyChosenData[3].title);
+            setMetropolitarnyCards();
+            checkUpDownButtonsConditions();
+        })
+
+        $('#btn-up').click(function () {
+            for(var i=3; i>1; --i){
+                window.metropolitarnyChosenData[i] = window.metropolitarnyChosenData[i-1];
+            }
+            getAndSetPreviousItem(window.metropolitarnyChosenData[1].title);
+            setMetropolitarnyCards();
+            checkUpDownButtonsConditions();
+        })
+
+    }
+
+    function checkUpDownButtonsConditions(){
+        if(window.metropolitarnyChosenData[1].title != window.metropolitarnyData.normalny[1].title){
+            $('#btn-up').show();
+        } else $('#btn-up').hide();
+
+        if(window.metropolitarnyChosenData[3].title != window.metropolitarnyData.normalny[6].title){
+            $('#btn-down').show();
+        } else $('#btn-down').hide();
+    }
+
+    function getAndSetPreviousItem(currentFirstItem) {
+        var previousItemIndex = null;
+        if(window.normlanyOrUlgowy == 'btn-ulgowy'){
+            for(var i=1; i<=4; i++){
+                if(window.metropolitarnyData.ulgowy[i].title == currentFirstItem){
+                    previousItemIndex = i-1;
+                    break;
+                }
+            }
+            window.metropolitarnyChosenData[1]=window.metropolitarnyData.ulgowy[previousItemIndex];
+        } else {
+            for(var i=1; i<=4; i++){
+                if(window.metropolitarnyData.normalny[i].title == currentFirstItem){
+                    previousItemIndex = i-1;
+                    break;
+                }
+            }
+            window.metropolitarnyChosenData[1]=window.metropolitarnyData.normalny[previousItemIndex];
+        }
+    }
+
+    function getAndSetNextItem(currentLastItemTitle) {
+        var nextItemIndex = 6;
+        if(window.normlanyOrUlgowy == 'btn-ulgowy'){
+            for(var i = 1; i<=4; i++){
+                if(window.metropolitarnyData.ulgowy[i].title == currentLastItemTitle){
+                    nextItemIndex = i+1;
+                    break;
+                }
+            }
+            window.metropolitarnyChosenData[3]=window.metropolitarnyData.ulgowy[nextItemIndex];
+        } else {
+            for(i = 1; i<=4; i++){
+                if(window.metropolitarnyData.normalny[i].title == currentLastItemTitle){
+                    nextItemIndex = i+1;
+                    break;
+                }
+            }
+            window.metropolitarnyChosenData[3]=window.metropolitarnyData.normalny[nextItemIndex];
+        }
+    }
+
+    function prepareEventsAndFunctions() {
+        hideShowCards();
+        setPrices();
+        setMetropilatarnyChosenData();
+        setMetropolitarnyCards();
+        checkUpDownButtonsConditions();
+    }
+
+    function setMetropolitarnyCards() {
+        if(window.metropolitarnyChosenData == null){
+            return 0;
+        }
+
+        for (var i=1; i<=3; i++){
+          $("#ticket-metropolitarny-"+i).find('.title-card').text(window.metropolitarnyChosenData[i].title);
+          $("#ticket-metropolitarny-"+i).find('.description-card').html(window.metropolitarnyChosenData[i].description);
+          $("#ticket-metropolitarny-"+i).find('.ticket-price').text(window.metropolitarnyChosenData[i].price.toFixed(2) + " zł");
+        }
+    }
+
+    function setMetropilatarnyChosenData() {
+        if(this.normlanyOrUlgowy == null){
+            return 0;
+        }
+
+        if(this.normlanyOrUlgowy == $('#btn-ulgowy').attr('id')){
+            this.metropolitarnyChosenData = {
+               1: this.metropolitarnyData.ulgowy[1],
+               2: this.metropolitarnyData.ulgowy[2],
+               3: this.metropolitarnyData.ulgowy[3]
+            }
+        } else if (this.normlanyOrUlgowy == $('#btn-normalny').attr('id')) {
+            this.metropolitarnyChosenData = {
+                1: this.metropolitarnyData.normalny[1],
+                2: this.metropolitarnyData.normalny[2],
+                3: this.metropolitarnyData.normalny[3]
+            }
+        }
+    }
+
+    function getTicketData(parentId){
+        var data = null;
+
+        if(this.zwyklyOrMetroplitarny == 'btn-zwykły'){
+            switch (parentId) {
+                case "btn-add-remove-jednoprzejazdowy":
+                    data = getCardData($('#ticket-jednoprzejazdowy')); break;
+                case "btn-add-remove-1godzinny":
+                    data = getCardData($('#ticket-1-godzinny')); break;
+                case "btn-add-remove-jednoprzejazdowy-nocny":
+                    data = getCardData($('#ticket-jednoprzejazdowy-nocny')); break;
+                case "btn-add-remove-24-godzinny":
+                    data = getCardData($("#ticket-24-godzinny")); break;
+            }
+        } else if (this.zwyklyOrMetroplitarny == 'btn-metropolitarny'){
+            switch (parentId) {
+                case "btn-add-remove-metropolitarny-1":
+                    data = getCardData($('#ticket-metropolitarny-1')); break;
+                case "btn-add-remove-metropolitarny-2":
+                    data = getCardData($('#ticket-metropolitarny-2')); break;
+                case "btn-add-remove-metropolitarny-3":
+                    data = getCardData($('#ticket-metropolitarny-3')); break;
+            }
+        }
+
+
+        return data;
+    }
+
+    function removeTicketEvent() {
+        $('.button-remove').click(function () {
+            var id = $(this).parent().attr('id');
+            data = getTicketData(id);
+
+            if(data){
+                removeTicketFromTable(data);
+            }
+        })
+    }
+
+    function addTicketEvent() {
+        $(".button-add").click(function () {
+            var id = $(this).parent().attr('id');
+            console.log(id);
+            data = getTicketData(id);
+
+            if(data){
+                addTicketToTable(data);
+            }
+        });
+    }
+
+    function removeTicketFromTable() {
+        window.podsumowanie = window.podsumowanie.map(function (el) {
+            if(el.title == data.title && el.type == data.type){
+                el.price = parseFloat(el.price) - parseFloat(data.price);
+                el.price = el.price.toFixed(2);
+                el.value--
+            }
+            return el;
+        }).filter(function (el) {
+            if(el.value != 0){
+                return el;
+            }
+        });
+
+        refreshTable();
+    }
+
+    function addTicketToTable(data) {
+        var found = false;
+        window.podsumowanie = window.podsumowanie.map(function (el) {
+            if(el.title == data.title && el.type == data.type){
+                found = true;
+                el.price = parseFloat(el.price) + parseFloat(data.price);
+                el.price = el.price.toFixed(2);
+                el.value++
+            }
+            return el;
+        });
+
+        if(!found){
+            window.podsumowanie.push(data);
+        }
+
+        refreshTable();
+
+    }
+
+    function refreshTable() {
+        window.outcome = 0;
+
+        $('tbody').empty();
+        window.podsumowanie.forEach(function (el) {
+            $('tbody').append("<tr><th>"+el.title+"</th>" + "<th>"+el.value+"</th>" + "<th>"+el.type+"</th>" + "<th>"+el.price+"</th></tr>")
+            window.outcome += parseFloat(el.price);
+
+        })
+
+        if(window.podsumowanie.length){
+            $('#button-pay').removeClass('disabled');
+            $('tbody').append("<tr><th>Podsumowanie:</th>"+"<th></th>" + "<th></th>" + "<th>"+window.outcome.toFixed(2)+"</th></tr>")
+        } else $('#button-pay').addClass('disabled');
+
+
+
+    }
+
+    function getCardData($el) {
+        var type = null;
+
+        if(window.normlanyOrUlgowy == "btn-ulgowy"){
+            type = 'Ulgowy';
+        } else {
+            type = "Normalny";
+        }
+
+        var array = {
+            "title": $el.find(".title-card").text(),
+            "description": $el.find(".description-card").text(),
+            "value": 1,
+            "type": type,
+            "price": $el.find(".ticket-price").text().slice(0, -3),
+        };
+
+        return array;
+    }
+
+    function setSelectedColour($element) {
+        var elementId = $element.attr('id');
+        if(elementId == $('#btn-zwykły').attr('id') || elementId == $('#btn-metropolitarny').attr('id') ){
+            $('#btn-zwykły, #btn-metropolitarny').removeClass('blue darken-2').addClass('grey lighten-5');
+        } else if (elementId == $('#btn-normalny').attr('id') || elementId == $('#btn-ulgowy').attr('id')) {
+            $('#btn-normalny, #btn-ulgowy').removeClass('blue darken-2').addClass('grey lighten-5');
+        }
+
+        $element.removeClass('grey lighten-5').addClass('blue darken-2');
+    }
+
+    function hideShowCards() {
+        $('.rows-zwykly, .rows-metropolitarny').hide();
+
+        if(this.normlanyOrUlgowy != null && this.zwyklyOrMetroplitarny == "btn-zwykły" ){
+            $('.rows-zwykly').show();
+        } else if (this.normlanyOrUlgowy != null && this.zwyklyOrMetroplitarny == "btn-metropolitarny") {
+            $('.rows-metropolitarny').show();
+        }
+
+    }
+
+    function setPrices() {
+        setZwyklyPrices()
+    }
+
+    function setZwyklyPrices() {
+        if(this.normlanyOrUlgowy == null){
+           return 0;
+        }
+
+        if(this.normlanyOrUlgowy == $('#btn-ulgowy').attr('id')){
+            $('#ticket-jednoprzejazdowy').find('.ticket-price').text('1.60 zł');
+            $('#ticket-1-godzinny').find('.ticket-price').text('1.80 zł');
+            $('#ticket-jednoprzejazdowy-nocny').find('.ticket-price').text('2.10 zł');
+            $('#ticket-24-godzinny').find('.ticket-price').text('6.50 zł');
+        } else if (this.normlanyOrUlgowy == $('#btn-normalny').attr('id')) {
+            $('#ticket-jednoprzejazdowy').find('.ticket-price').text('3.20 zł');
+            $('#ticket-1-godzinny ').find('.ticket-price').text('3.80 zł');
+            $('#ticket-jednoprzejazdowy-nocny').find('.ticket-price').text('4.20 zł');
+            $('#ticket-24-godzinny').find('.ticket-price').text('13.00 zł');
+        }
+    }
+
+</script>
+</body>
+</html>

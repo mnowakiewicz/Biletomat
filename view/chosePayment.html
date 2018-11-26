@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+    <title>Biletomat</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>if (window.module) module = window.module;</script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+    <style>
+
+        body {
+        }
+
+        .btn-large {
+            width: 100%;
+            height: 170px;
+            color: black;
+            font-size: 450%;
+        }
+
+        #steps {
+            padding-top: 30px;
+            padding-right: 30px;
+        }
+        img {
+            width: 80%;
+        }
+
+        .row {
+            margin-bottom: 0px;
+        }
+
+        .card-content {
+            text-align: center;
+        }
+        p {
+            font-size: 30px;
+        }
+
+
+    </style>
+
+</head>
+<body class="teal lighten-4">
+    <div class="row" id="logo-row">
+        <div class="col s2">
+            <img src="../imageedit_4_7935784377.png">
+        </div>
+        <div class="col s2 offset-s8" id="steps">
+            <div class="card z-depth-5">
+                <div class="card-content">
+                    <p>Krok <b>3/4</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="card z-depth-5">
+                <div class="card-content">
+                    <h3>Zapłać kartą lub gotówką</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s3 offset-s3">
+            <div class="card z-depth-5">
+                <div class="card-content">
+                    <span class="card-title">Zapłacono:</span>
+                    <h3 id="paid"></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col s3">
+            <div class="card z-depth-5">
+                <div class="card-content">
+                    <span class="card-title">Pozostało do zapłaty:</span>
+                    <h3 id="toPay"></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <p>Drukowanie Biletu...</p>
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+     var ipcRenderer = require('electron').ipcRenderer;
+     var outcome = 25.00;
+     var paid = 0;
+
+    ipcRenderer.on('get:outcome:replay', (event, arg) => {
+        window.outcome = arg;
+    });
+    ipcRenderer.send('get:outcome');
+
+    $(function () {
+        $('.modal').modal({dismissible:false});
+
+        updatePaydAndToPayCards();
+        $( "body" ).keyup(function(event) {
+            if(window.paid < window.outcome){
+                if(event.which == 49){
+                    window.paid += 0.10;
+                }
+                if(event.which == 50){
+                    window.paid += 0.20;
+                }
+                if(event.which == 51){
+                    window.paid += 0.50;
+                }
+                if(event.which == 52){
+                    window.paid += 1;
+                }
+                if(event.which == 53){
+                    window.paid += 2;
+                }
+                if(event.which == 32){
+                    window.paid = window.outcome;
+                }
+            }
+            updatePaydAndToPayCards();
+        });
+    })
+
+    function updatePaydAndToPayCards() {
+        var toPay = window.outcome - window.paid;
+        $('#paid').text(window.paid.toFixed(2) + ' zł');
+        $('#toPay').text(toPay.toFixed(2) + ' zł');
+
+        if(window.paid >= window.outcome-0.05){
+            $('#modal1').modal('open');
+
+            setTimeout(function () {
+                ipcRenderer.send('pick:ticket', 'bilet');
+            }, 5000)
+        }
+    }
+
+
+</script>
