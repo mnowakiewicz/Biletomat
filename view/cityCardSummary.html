@@ -1,10 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+    <title>Biletomat</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
 
+    <!-- scripts -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script>if (window.module) module = window.module;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        /*body {*/
+        /*font-family: 'Abel', sans-serif;*/
+        /*}*/
+
+        #logo-row {
+            margin-bottom: 0px;
+        }
+
+        .btn-large {
+            width: 100%;
+            height: 70px;
+            color: black;
+            font-size: 25px;
+        }
+
+        #steps, #table-payment {
+            padding-right: 30px;
+
+        }
+
+        #table-payment .card {
+            margin: 0 0 0;
+        }
+
+        #steps {
+            padding-top: 30px;
+            font-size: 30px;
+        }
+        img {
+            width: 80%;
+        }
+
+        .card-content {
+            text-align: center;
+        }
+
+        .title-card {
+            font-size: 18px;
+        }
+
+        .second-button {
+            margin-top: 10px;
+        }
+
+        .blue {
+            color: white;
+        }
+
+        .rows-metropolitarny .button-add {
+            margin-top: 10%;
+            margin-left: 5%;
+        }
+
+        .button-add {
+            margin-top: 20%;
+            margin-left: 5%;
+        }
+
+        .button-remove {
+            display: block;
+            margin-left: 5%;
+            margin-top: 20%
+        }
+
+        #button-pay {
+            width: 100%;
+        }
+
+        .rows-zwykly {
+            /*display: none;*/
+        }
+
+        .rows-metropolitarny {
+            /*display: none;*/
+        }
+
+        .rows-metropolitarny h5 {
+            height: 84px;
+            line-height: 3.5;
+            margin-right: 10px
+        }
+
+        .rows-metropolitarny .row {
+            margin-bottom: 0;
+        }
+
+        #btn-down {
+            margin-top: 80px;
+        }
+
+        tbody th {
+            font-weight: normal;
+        }
+
+        .button-back {
+            margin-top: 40px;
+            margin-left: 10px;
+            width: 80px!important;
+            height: 80px!important;
+        }
+        /*.table-payment {*/
+        /*height: 500px;*/
+        /*}*/
+    </style>
+</head>
+<body class="teal lighten-4">
+<div class="row" id="logo-row">
+    <div class="col s2">
+        <img src="../imageedit_4_7935784377.png">
+    </div>
+    <div class="col s1 offset-s7">
+        <button class="btn-floating btn-large waves-effect waves-light blue button-back z-depth-3" ><i class="material-icons">keyboard_backspace</i></button>
+    </div>
+    <div class="col s2" id="steps">
+        <div class="card z-depth-5">
+            <div class="card-content">
+                <p>Krok <b>2/4</b></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s8">
+
+
+
+        <!--- ROWS METROPOLITARNY BILET -->
+        <div class="row cards rows-metropolitarny">
+            <div class="col s1 offset-s1">
+                <button class="btn-floating grey btn-large waves-effect waves-light z-depth-3" id="btn-up">
+                    <i class="material-icons">keyboard_arrow_up</i>
+                </button>
+            </div>
+            <div class="col s8">
+                <div class="row card z-depth-5" id="ticket-row-1">
+                    <div class="col s9">
+                        <div class="card-content">
+                            <p class="title-card left-align"></p>
+                            <p class="description-card left-align"></p>
+                        </div>
+                    </div>
+                    <div class="col s3" style="text-align: center;">
+                        <h5 class="blue darken-2 z-depth-3 ticket-price"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col s1" style="display: block" id="btn-add-remove-row-1">
+                <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+            </div>
+        </div>
+        <div class="row cards rows-metropolitarny">
+            <div class="col s8 offset-s2">
+                <div class="row card z-depth-5" id="ticket-row-2">
+                    <div class="col s9">
+                        <div class="card-content">
+                            <p class="title-card left-align"></p>
+                            <p class="description-card left-align"></p>
+                        </div>
+                    </div>
+                    <div class="col s3" style="text-align: center;">
+                        <h5 class="blue darken-2 z-depth-3 ticket-price"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col s1" style="display: block" id="btn-add-remove-row-2">
+                <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+            </div>
+        </div>
+        <div class="row cards rows-metropolitarny">
+            <div class="col s1 offset-s1">
+                <button class="btn-floating grey btn-large waves-effect waves-light z-depth-3" id="btn-down">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </button>
+            </div>
+            <div class="col s8">
+                <div class="row card z-depth-5" id="ticket-row-3">
+                    <div class="col s9">
+                        <div class="card-content">
+                            <p class="title-card left-align"></p>
+                            <p class="description-card left-align"></p>
+                        </div>
+                    </div>
+                    <div class="col s3" style="text-align: center;">
+                        <h5 class="blue darken-2 z-depth-3 ticket-price"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col s1" style="display: block" id="btn-add-remove-row-3">
+                <button class="btn-floating btn-large waves-effect waves-light green button-add z-depth-3" ><i class="material-icons">add</i></button>
+                <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s4" id="table-payment">
+        <div class="card z-depth-5">
+            <div class="card-content">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Bilet</th>
+                        <th>Il.</th>
+                        <th>Typ</th>
+                        <th>Cena[z³]</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <button id="button-pay" class="btn-large  blue darken-2 waves-effect waves-light z-depth-5 disabled">ZAP£AÆ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>
 </body>
 </html>

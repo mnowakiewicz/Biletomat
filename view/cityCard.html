@@ -82,9 +82,38 @@
             font-size: 17px;
         }
 
-        .row-2, .row-3, .row-date, .row-month {
+        .row-2, .row-3, .row-date, .row-month, .row-card-info {
             display: none;
         }
+
+
+
+        .datepicker-calendar-container td {
+            font-size: 30px;
+
+        }
+
+        .datepicker-calendar-container thead th {
+            font-size: 30px;
+        }
+
+        .datepicker-cancel, .datepicker-done {
+            font-size: 25px;
+            color: #1976d2;
+        }
+
+        .datepicker-date-display {
+            background-color: #1976d2;
+        }
+
+        .datepicker-table td.is-selected {
+            background-color: #1976d2;
+        }
+
+        .datepicker-table td.is-today {
+            color: #1976d2;
+        }
+
     </style>
 
 </head>
@@ -109,7 +138,7 @@
     <div class="row row-1">
         <div class="col s4 offset-s2">
             <button class="btn-large grey lighten-5  waves-effect waves-light z-depth-5" id="btn-przedluz">
-                PRZEDLU¯ BILET
+                PRZED£U¯ BILET
             </button>
         </div>
         <div class="col s4">
@@ -145,11 +174,23 @@
     </div>
 
     <div class="row row-date">
-        <div class="col s2 offset-s5" style="margin-top: 10px">
-            <div class="card" id="wybierz-date">
+        <div class="col s4 offset-s4" style="margin-top: 10px">
+            <div class="card z-depth-3" id="wybierz-date">
                 <div class="card-content">
-                    <span class="card-title">Wybierz Datê</span>
+                    <span class="card-title">Wybierz Datê Rozpoczêcia</span>
                     <input class="datepicker" type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-card-info">
+        <div class="col s8 offset-s2" style="margin-top: 10px">
+            <div class="card z-depth-5" id="city-card-info">
+                <div class="card-content">
+                    <span class="card-title" style="font-size: 25px"><b>Informacje o aktualnym bilecie</b></span>
+                    <p class="left-align" style="font-size: 20px"><b>Rodzaj biletu:</b> Miesiêczny</p>
+                    <p class="left-align" style="font-size: 20px"><b>Wa¿no¶æ:</b> lis 2018</p>
+                    <p class="left-align" style="font-size: 20px"><b>Cena:</b></p>
                 </div>
             </div>
         </div>
@@ -202,8 +243,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s2 offset-s5">
-            <button class="btn-large blue darken-2 waves-effect waves-light z-depth-2 white-text disabled"
+        <div class="col s4 offset-s4">
+            <button class="btn-large blue darken-2 waves-effect waves-light z-depth-5 white-text disabled"
                     id="btn-dalej">
                 DALEJ
             </button>
@@ -257,7 +298,9 @@
         ]
     };
 
-    options = {i18n: myi18n};
+    options = {
+        i18n: myi18n,
+    };
 
     $(function () {
 
@@ -274,6 +317,7 @@
             setSelectedColour($(this));
             diableDalejButton();
             hideAllRows();
+            $(".row-card-info").show();
             activeDalejButton(
                 {
                     'option': 'przedlu¿',
@@ -374,6 +418,7 @@
         $(".row-3").hide();
         $('.row-month').hide();
         $('.row-date').hide();
+        $('.row-card-info').hide();
         $('.datepicker').val(moment().format('MMM DD, YYYY'));
     }
 
