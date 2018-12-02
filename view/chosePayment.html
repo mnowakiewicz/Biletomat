@@ -43,6 +43,16 @@
             font-size: 30px;
         }
 
+        .button-back {
+            margin-top: 40px;
+            margin-left: 10px;
+            width: 80px!important;
+            height: 80px!important;
+        }
+
+        .button-back i {
+            margin-bottom: 10px;
+        }
 
     </style>
 
@@ -52,10 +62,13 @@
         <div class="col s2">
             <img src="../imageedit_4_7935784377.png">
         </div>
-        <div class="col s2 offset-s8" id="steps">
+        <div class="col s1 offset-s7">
+            <button class="btn-floating btn-large waves-effect waves-light blue button-back z-depth-3" ><i class="material-icons">keyboard_backspace</i></button>
+        </div>
+        <div class="col s2" id="steps">
             <div class="card z-depth-5">
                 <div class="card-content">
-                    <p>Krok <b>3/4</b></p>
+                    <p>Krok <b>2/4</b></p>
                 </div>
             </div>
         </div>
@@ -110,6 +123,11 @@
 
     $(function () {
         $('.modal').modal({dismissible:false});
+
+
+        $(".button-back").click(function () {
+            ipcRenderer.send('back:mainWindow');
+        });
 
         updatePaydAndToPayCards();
         $( "body" ).keyup(function(event) {

@@ -92,4 +92,12 @@ ipcMain.on('back:mainWindow', function (event, arg) {
     mainWindow.loadFile('view/main.html');
 })
 
+ipcMain.on('back:tickets', function (event, arg) {
+    mainWindow.loadFile('view/tickets.html');
+})
+
+ipcMain.on('go:cityCard', function (event, arg) {
+    mainWindow.loadFile('view/cityCard.html');
+})
+
 

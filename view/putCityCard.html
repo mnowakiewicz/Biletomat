@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2"/>
     <title>Biletomat</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script>if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }</script>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script>if (window.module) module = window.module;</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -28,6 +31,7 @@
             padding-top: 30px;
             padding-right: 30px;
         }
+
         #logo-row img {
             width: 80%;
         }
@@ -39,6 +43,7 @@
         .card-content {
             text-align: center;
         }
+
         p {
             font-size: 30px;
         }
@@ -50,38 +55,57 @@
 
 </head>
 <body class="teal lighten-4">
-    <div class="row" id="logo-row">
-        <div class="col s2">
-            <img src="../imageedit_4_7935784377.png">
-        </div>
-        <div class="col s2 offset-s8" id="steps">
-            <div class="card z-depth-5">
-                <div class="card-content">
-                    <p>Krok <b>4/4</b></p>
-                </div>
+<div class="row" id="logo-row">
+    <div class="col s2">
+        <img src="../imageedit_4_7935784377.png">
+    </div>
+    <div class="col s2 offset-s8" id="steps">
+        <div class="card z-depth-5">
+            <div class="card-content">
+                <p>Krok <b>4/4</b></p>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col s6 offset-s3">
-            <div class="card z-depth-5">
-                <div class="card-content">
-                    <h3>Włóż kartę miejska do czytnika</h3>
-                </div>
+</div>
+<div class="row">
+    <div class="col s6 offset-s3">
+        <div class="card z-depth-5">
+            <div class="card-content">
+                <h3>Włóż kartę miejska do czytnika</h3>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col s6 offset-s3">
-            <img id="img-gif" src="../46919924_1969807449778696_4794896339588612096_n.gif">
-        </div>
+</div>
+<div class="row">
+    <div class="col s6 offset-s3">
+        <img id="img-gif" src="../46919924_1969807449778696_4794896339588612096_n.gif">
+    </div>
 
-    </div>
+</div>
 </body>
 </html>
 <script>
-    // var ipcRenderer = require('electron').ipcRenderer;
-    // setTimeout(function () {
-    //     ipcRenderer.send('back:mainWindow');
-    // }, 7000)
+    var ipcRenderer = require('electron').ipcRenderer;
+
+    ipcRenderer.on('get:outcome:replay', (event, arg) => {
+        window.outcome = arg;
+    });
+    ipcRenderer.send('get:outcome');
+
+    $(function () {
+
+        $(".button-back").click(function () {
+            ipcRenderer.send('back:mainWindow');
+        });
+
+        $("body").keyup(function (event) {
+
+            if (event.which == 32) {
+                ipcRenderer.send('go:cityCard');
+            }
+
+        });
+    })
+
+
 </script>
