@@ -29,6 +29,13 @@
             font-size: 10px;
         }
 
+        .description-card {
+            font-size: 17px;
+        }
+
+        #main-option-1, #main-option-2 {
+            font-size: 19px;
+        }
         #logo-row .btn-large, #button-pay {
             width: 100%;
             height: 70px;
@@ -317,14 +324,14 @@
     //30dniowy
     var mainOption;
     $(function () {
-        var ipcRenderer = require('electron').ipcRenderer;
-
-        ipcRenderer.on('get:cityCardOption:replay', (event, arg) => {
-            window.option = arg;
-            setupOptions();
-        });
-        ipcRenderer.send('get:cityCardOption');
-        // setupOptions();
+        // var ipcRenderer = require('electron').ipcRenderer;
+        //
+        // ipcRenderer.on('get:cityCardOption:replay', (event, arg) => {
+        //     window.option = arg;
+        //     setupOptions();
+        // });
+        // ipcRenderer.send('get:cityCardOption');
+        setupOptions();
 
         $(".button-back").click(function () {
             var ipcRenderer = require('electron').ipcRenderer;
