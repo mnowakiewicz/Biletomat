@@ -68,7 +68,7 @@
         <div class="col s2" id="steps">
             <div class="card z-depth-5">
                 <div class="card-content">
-                    <p>Krok <b>2/4</b></p>
+                    <p>Krok <b>2/3</b></p>
                 </div>
             </div>
         </div>
@@ -116,18 +116,25 @@
      var outcome = 25.00;
      var paid = 0;
 
-    ipcRenderer.on('get:outcome:replay', (event, arg) => {
+    ipcRenderer.on('get:outcome:replay', (event, arg, arg2) => {
         window.outcome = arg;
+        var messType = arg2;
+        if(messType == 'kartaMiejska'){
+            $('.modal-content p').text('Do³adowywanie karty miejskiej...')
+            $('#steps b').text('4/5');
+            $(".button-back").click(function () {
+                ipcRenderer.send('back:cityCard');
+            });
+        } else {
+            $(".button-back").click(function () {
+                ipcRenderer.send('back:mainWindow');
+            });
+        }
     });
     ipcRenderer.send('get:outcome');
 
     $(function () {
         $('.modal').modal({dismissible:false});
-
-
-        $(".button-back").click(function () {
-            ipcRenderer.send('back:mainWindow');
-        });
 
         updatePaydAndToPayCards();
         $( "body" ).keyup(function(event) {

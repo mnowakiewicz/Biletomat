@@ -22,11 +22,18 @@
             margin-bottom: 0px;
         }
 
-        .btn-large {
+        #btn-4-mies, #btn-5-mies {
+            width: 100%;
+            height: 200px;
+            color: black;
+            font-size: 10px;
+        }
+
+        #logo-row .btn-large, #button-pay {
             width: 100%;
             height: 70px;
             color: black;
-            font-size: 25px;
+            font-size: 20px;
         }
 
         #steps, #table-payment {
@@ -68,35 +75,33 @@
         }
 
         .button-add {
-            margin-top: 20%;
+            margin-top: 0;
             margin-left: 5%;
         }
 
         .button-remove {
             display: block;
             margin-left: 5%;
-            margin-top: 20%
+            margin-top: 20%;
         }
 
         #button-pay {
             width: 100%;
         }
 
-        .rows-zwykly {
-            /*display: none;*/
-        }
 
-        .rows-metropolitarny {
-            /*display: none;*/
-        }
-
-        .rows-metropolitarny h5 {
+        .rows-options h5 {
             height: 84px;
             line-height: 3.5;
             margin-right: 10px
+
         }
 
-        .rows-metropolitarny .row {
+        .rows-options {
+            display: none;
+        }
+
+        .rows-options .row {
             margin-bottom: 0;
         }
 
@@ -130,7 +135,7 @@
     <div class="col s2" id="steps">
         <div class="card z-depth-5">
             <div class="card-content">
-                <p>Krok <b>2/4</b></p>
+                <p>Krok <b>3/5</b></p>
             </div>
         </div>
     </div>
@@ -138,11 +143,24 @@
 
 <div class="row">
     <div class="col s8">
+        <div class="row row-1">
+            <div class="col s4 offset-s2">
+                <div class="card waves-effect waves-light z-depth-5" style="width: 100%" id="main-option-1">
+                    <div class="card-content">
 
+                    </div>
+                </div>
+            </div>
+            <div class="col s4">
+                <div class="card waves-effect waves-light z-depth-5" style="width: 100%" id="main-option-2">
+                    <div class="card-content">
 
-
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--- ROWS METROPOLITARNY BILET -->
-        <div class="row cards rows-metropolitarny">
+        <div class="row cards rows-options">
             <div class="col s1 offset-s1">
                 <button class="btn-floating grey btn-large waves-effect waves-light z-depth-3" id="btn-up">
                     <i class="material-icons">keyboard_arrow_up</i>
@@ -166,7 +184,7 @@
                 <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
             </div>
         </div>
-        <div class="row cards rows-metropolitarny">
+        <div class="row cards rows-options">
             <div class="col s8 offset-s2">
                 <div class="row card z-depth-5" id="ticket-row-2">
                     <div class="col s9">
@@ -185,7 +203,7 @@
                 <button class="btn-floating btn-large waves-effect waves-light red button-remove z-depth-3" ><i class="material-icons">remove</i></button>
             </div>
         </div>
-        <div class="row cards rows-metropolitarny">
+        <div class="row cards rows-options">
             <div class="col s1 offset-s1">
                 <button class="btn-floating grey btn-large waves-effect waves-light z-depth-3" id="btn-down">
                     <i class="material-icons">keyboard_arrow_down</i>
@@ -218,7 +236,6 @@
                     <thead>
                     <tr>
                         <th>Bilet</th>
-                        <th>Il.</th>
                         <th>Typ</th>
                         <th>Cena[z³]</th>
                     </tr>
@@ -226,15 +243,254 @@
                     <tbody>
                     </tbody>
                 </table>
-                <button id="button-pay" class="btn-large  blue darken-2 waves-effect waves-light z-depth-5 disabled">ZAP£AÆ</button>
+                <button id="button-pay" class="btn-large  blue darken-2 waves-effect waves-light z-depth-5 disabled white-text">ZAP£AÆ</button>
             </div>
         </div>
     </div>
 </div>
-
 <script>
 
+    var semestralne = [
+        {
+            'linia': "Zwyk³e w granicach Gdynii",
+            1: 156,
+            2: 195
+        },
+        {
+            'linia': "Nocne, pospieszne i zwyk³e w granicach Gdynii",
+            1: 179,
+            2: 223
+        },
+        {
+            'linia': "Nocne, pospieszne i zwyk³e w granicach Sopotu / Rumii / Gm. Kosakowo / Gm. ¯ukowo / Gm. Szemud / Gm. Wejherowo",
+            1: 122,
+            2: 152
+        },
+        {
+            'linia': "Nocne, pospieszne i zwyk³e w granicach Rumi, Redy i miasta Wejherowa / Gm. Wejherowo i Rumii",
+            1: 160,
+            2: 200
+        },
+        {
+            'linia': "Nocne, pospieszne i zwyk³e w obrêbie sieci komunikacyjnej [w tym linie G, N1, 101 i 171]",
+            1: 160,
+            2: 200
+        },
+    ];
 
+    var miesieczne30Dniowe = [
+        {
+            'linia': "Zwyk³e w granicach Gdynii",
+            1: 36,
+            2: 41
+        },
+        {
+            'linia': "Nocne, pospieszne i zwyk³e w granicach Gdyni",
+            1: 43,
+            2: 47
+        },
+        {
+            'linia': "Nocne, pospieszne i zwyk³e w granicach Sopotu / Rumii / Gm. Kosakowo / Gm. ¯ukowo / Gm. Szemud / Gm. Wejherowo",
+            1:29,
+            2: 32
+        },
+        {
+            'linia': "Nocne, pospieszne i zwyk³e w granicach Rumi, Redy i miasta Wejherowa / Gm. Wejherowo i Rumi",
+            1:37,
+            2:42
+        },
+        {
+            'linia': "Nocne, pospieszne i zwyk³e w obrêbie sieci komunikacyjnej [w tym linie G, N1, 101 i 171]",
+            1:48,
+            2:52
+        },
+    ];
+    var option = {
+        'option': 'miesieczny',
+        'month': 'Grudzieñ',
+        'date': null
+    };
+    var chosenTable = miesieczne30Dniowe;
+    //przedluz
+    //semestralny
+    //miesieczny
+    //30dniowy
+    var mainOption;
+    $(function () {
+        var ipcRenderer = require('electron').ipcRenderer;
+
+        ipcRenderer.on('get:cityCardOption:replay', (event, arg) => {
+            window.option = arg;
+            setupOptions();
+        });
+        ipcRenderer.send('get:cityCardOption');
+        // setupOptions();
+
+        $(".button-back").click(function () {
+            var ipcRenderer = require('electron').ipcRenderer;
+            ipcRenderer.send('back:cityCard');
+        });
+
+
+        $(".button-remove").addClass('disabled');
+        $('#main-option-1, #main-option-2').click(function () {
+            window.mainOption = $(this).attr('id');
+            showTicketBuyOptions();
+            removeSelectedOptions();
+            setupOptionsTickets();
+            window.mainElement = this;
+            checkDownUpButtonsConditions();
+            $(this).addClass('blue darken-2');
+        });
+
+        $('.button-add').click(function () {
+            addCardTicketToTable(this);
+        });
+
+        $('.button-remove').click(function () {
+            if(!$(this).hasClass('disabled')){
+                $('#button-pay').addClass('disabled');
+                $('tbody').empty();
+                $('.button-add, .button-remove, #btn-down, #btn-up').removeClass('disabled');
+                $(".button-remove").addClass('disabled');
+                window.outcomeCard = 0;
+            }
+        })
+
+        $('#btn-down').click(function () {
+            if(!$(this).hasClass('disabled')){
+                var BreakException = {};
+                try {
+                    window.chosenTable.forEach(function (el, index) {
+                        if(el.linia == $('#ticket-row-1').find('.description-card').text()){
+
+                            setRowData(1, window.chosenTable[index+1]);
+                            setRowData(2, window.chosenTable[index+2]);
+                            setRowData(3, window.chosenTable[index+3]);
+                            throw BreakException;
+                        }
+                    }) 
+                } catch (e) {
+                    if (e !== BreakException) throw e;
+                }
+            }
+            checkDownUpButtonsConditions();
+        })
+
+        $('#btn-up').click(function () {
+            if(!$(this).hasClass('disabled')){
+                var BreakException = {};
+                try {
+                    window.chosenTable.forEach(function (el, index) {
+                        if(el.linia == $('#ticket-row-3').find('.description-card').text()){
+
+                            setRowData(1, window.chosenTable[index-3]);
+                            setRowData(2, window.chosenTable[index-2]);
+                            setRowData(3, window.chosenTable[index-1]);
+                            throw BreakException;
+                        }
+                    })
+                } catch (e) {
+                    if (e !== BreakException) throw e;
+                }
+            }
+            checkDownUpButtonsConditions();
+        })
+
+        $('#button-pay').click(function () {
+            if(!$(this).hasClass('disabled')){
+                console.log(window.outcomeCard);
+                var ipcRenderer = require('electron').ipcRenderer;
+                ipcRenderer.send('tickets:pay', window.outcomeCard, 'kartaMiejska');
+            }
+        })
+    });
+    var outcomeCard = 0;
+    var description;
+    function addCardTicketToTable(el) {
+        $('.button-add, .button-remove, #btn-down, #btn-up').addClass('disabled');
+        $(el).parent().find('.button-remove').removeClass('disabled');
+        window.description = $(el).parent().parent().find('.description-card').text();
+
+        window.chosenTable.forEach(function (el) {
+            if(el.linia == window.description){
+                if(window.mainOption == "main-option-1"){
+                    var price = el[1];
+                } else {
+                    var price = el[2];
+                }
+                option = window.option;
+                var title = option.option.charAt(0).toUpperCase() + option.option.substr(1);
+                if(option.date != null ){
+                    title += "["+option.date+"] - ";
+                } else if (option.month != null ) {
+                    title += "["+option.month+"] - ";
+                } else {
+                    title += ', ';
+                }
+                title += el.linia.charAt(0).toLowerCase()+el.linia.substr(1);
+                $('tbody').append("<tr><th>"+title+"</th>" + "<th>"+"Ulgowy"+"</th>" + "<th>"+price+"</th></tr>");
+                console.log(parseFloat(price));
+                window.outcomeCard += parseFloat(price);
+            }
+        });
+
+        $('#button-pay').removeClass('disabled');
+    }
+
+
+
+    function showTicketBuyOptions() {
+        $('.rows-options').show();
+    }
+
+    function setupOptions() {
+        if(window.option.option == 'semestralny'){
+            window.chosenTable = window.semestralne;
+            $('#main-option-1').find('.card-content').append("<p>Ulgowy 4-miesiêczny</p>\n" +
+                "                        <p>wa¿ny we wszystkie dni tygodnia</p>\n" +
+                "                        <p>01.10-31.01 lub 01.02-31.05</p>");
+            $('#main-option-2').find('.card-content').append("<p>Ulgowy 5-miesiêczny</p>\n" +
+                "                        <p>wa¿ny we wszystkie dni tygodnia</p>\n" +
+                "                        <p>01.09-31.01 lub 01.02-30.06</p>");
+        } else if (window.option.option == 'miesieczny' || window.option.option == '30 dniowy'){
+            window.chosenTable = window.miesieczne30Dniowe;
+            $('#main-option-1').find('.card-content').append("<p>Ulgowy "+window.option.option+", wa¿ny od poniedzia³ku do pi±tku</p>");
+            $('#main-option-2').find('.card-content').append("<p>Ulgowy "+window.option.option+", wa¿ny we wszystkie dni tygodnia</p>");
+        }
+    }
+
+    function removeSelectedOptions(){
+        $('#main-option-1, #main-option-2').removeClass('blue darken-2');
+    }
+
+    function setupOptionsTickets() {
+            setRowData(1, window.chosenTable[0]);
+            setRowData(2, window.chosenTable[1]);
+            setRowData(3, window.chosenTable[2]);
+    }
+    var mainElement;
+
+    function setRowData(nr, table) {
+        var name = '#ticket-row-'+nr;
+        $(name).find('.description-card').text(table.linia);
+        if($(mainElement).attr('id') == 'main-option-1'){
+            $(name).find('.ticket-price').text(table[1] + ' z³');
+        } else {
+            $(name).find('.ticket-price').text(table[2] + ' z³');
+        }
+
+    }
+
+    function checkDownUpButtonsConditions() {
+        if($('#ticket-row-1').find('.description-card').text() == window.semestralne[0].linia) {
+            $('#btn-up').hide();
+        } else $('#btn-up').show();
+
+        if($('#ticket-row-3').find('.description-card').text() == window.semestralne[4].linia) {
+            $('#btn-down').hide();
+        } else $('#btn-down').show();
+    }
 </script>
 </body>
 </html>

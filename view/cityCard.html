@@ -129,7 +129,7 @@
     <div class="col s2" id="steps">
         <div class="card z-depth-5">
             <div class="card-content">
-                <p>Krok <b>2/4</b></p>
+                <p>Krok <b>2/5</b></p>
             </div>
         </div>
     </div>
@@ -188,7 +188,7 @@
             <div class="card z-depth-5" id="city-card-info">
                 <div class="card-content">
                     <span class="card-title" style="font-size: 25px"><b>Informacje o aktualnym bilecie</b></span>
-                    <p class="left-align" style="font-size: 20px"><b>Rodzaj biletu:</b> Miesiêczny</p>
+                    <p class="left-align" style="font-size: 20px"><b>Rodzaj biletu:</b> Miesiêczny, ulgowy</p>
                     <p class="left-align" style="font-size: 20px"><b>Wa¿no¶æ:</b> lis 2018</p>
                     <p class="left-align" style="font-size: 20px"><b>Cena:</b></p>
                 </div>
@@ -375,14 +375,14 @@
             $(".row-3").show();
             $('.row-date').show();
             activeDalejButton({
-                'option': '30dniowy',
+                'option': '30 dniowy',
                 'month': null,
                 'date': $('input').val(),
             });
 
             $('input').change(function () {
                 window.chosenOption = {
-                    'option': '30dniowy',
+                    'option': '30 dniowy',
                     'month': null,
                     'date': $(this).val(),
                 };

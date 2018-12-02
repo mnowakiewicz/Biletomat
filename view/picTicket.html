@@ -55,7 +55,7 @@
     <div class="col s2 offset-s8" id="steps">
         <div class="card z-depth-5">
             <div class="card-content">
-                <p>Krok <b>4/4</b></p>
+                <p>Krok <b>3/3</b></p>
             </div>
         </div>
     </div>
@@ -77,4 +77,14 @@
     setTimeout(function () {
         ipcRenderer.send('back:mainWindow');
     }, 7000)
+
+
+    ipcRenderer.on('get:outcome:replay', (event, arg, arg2) => {
+        var messType = arg2;
+        if(messType == 'kartaMiejska'){
+            $('.card-content h3').remove();
+            $('#steps b').text('5/5');
+        }
+    });
+    ipcRenderer.send('get:outcome');
 </script>
