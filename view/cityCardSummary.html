@@ -324,14 +324,14 @@
     //30dniowy
     var mainOption;
     $(function () {
-        // var ipcRenderer = require('electron').ipcRenderer;
-        //
-        // ipcRenderer.on('get:cityCardOption:replay', (event, arg) => {
-        //     window.option = arg;
-        //     setupOptions();
-        // });
-        // ipcRenderer.send('get:cityCardOption');
-        setupOptions();
+        var ipcRenderer = require('electron').ipcRenderer;
+
+        ipcRenderer.on('get:cityCardOption:replay', (event, arg) => {
+            window.option = arg;
+            setupOptions();
+        });
+        ipcRenderer.send('get:cityCardOption');
+        // setupOptions();
 
         $(".button-back").click(function () {
             var ipcRenderer = require('electron').ipcRenderer;
