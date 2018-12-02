@@ -300,6 +300,13 @@
 
     options = {
         i18n: myi18n,
+        disableDayFn: function (date) {
+
+            if(date <= Date.now() ){
+                return true;
+            }
+            return false;
+        }
     };
 
     $(function () {
