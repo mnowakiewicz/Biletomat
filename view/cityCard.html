@@ -348,6 +348,13 @@
 
         $('.months button').click(function () {
             selectMonth(this);
+        });
+
+        $('#btn-dalej').click(function () {
+            if(!$(this).hasClass('disabled')){
+                var ipcRenderer = require('electron').ipcRenderer;
+                ipcRenderer.send('cards:next', window.chosenOption);
+            }
         })
 
     });

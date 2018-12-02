@@ -83,6 +83,16 @@ ipcMain.on('tickets:pay', function (e, outcome) {
     mainWindow.loadFile('view/chosePayment.html')
 });
 
+var cityCardOption;
+ipcMain.on('cards:next', function (e, option) {
+    cityCardOption = option;
+    mainWindow.loadFile('view/cityCardSummary.html')
+});
+
+ipcMain.on('get:cityCardOption', (event, arg) => {
+    event.sender.send('get:cityCardOption:replay', cityCardOption)
+});
+
 
 ipcMain.on('get:outcome', (event, arg) => {
     event.sender.send('get:outcome:replay', outcomeTickets)
@@ -90,14 +100,14 @@ ipcMain.on('get:outcome', (event, arg) => {
 
 ipcMain.on('back:mainWindow', function (event, arg) {
     mainWindow.loadFile('view/main.html');
-})
+});
 
 ipcMain.on('back:tickets', function (event, arg) {
     mainWindow.loadFile('view/tickets.html');
-})
+});
 
 ipcMain.on('go:cityCard', function (event, arg) {
     mainWindow.loadFile('view/cityCard.html');
-})
+});
 
 
