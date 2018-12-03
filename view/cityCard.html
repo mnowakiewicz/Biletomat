@@ -82,7 +82,7 @@
             font-size: 17px;
         }
 
-        .row-2, .row-3, .row-date, .row-month, .row-card-info {
+        .row-2, .row-3, .row-date, .row-month, .row-card-info{
             display: none;
         }
 
@@ -122,9 +122,11 @@
     <div class="col s2">
         <img src="../imageedit_4_7935784377.png">
     </div>
-    <div class="col s1 offset-s7">
-        <button class="btn-floating btn-large waves-effect waves-light blue button-back z-depth-3"><i
-                class="material-icons">keyboard_backspace</i></button>
+    <div class="col s2 offset-s3">
+        <p class="time white-text"></p>
+    </div>
+    <div class="col s1 offset-s2">
+        <button class="btn-floating btn-large waves-effect waves-light blue button-back z-depth-3" ><i class="material-icons">keyboard_backspace</i></button>
     </div>
     <div class="col s2" id="steps">
         <div class="card z-depth-5">
@@ -254,6 +256,14 @@
 </div>
 </body>
 </html>
+<script>
+    var time = moment();
+    $('.time').text(time.format('LTS'));
+    setInterval(function () {
+        var time = moment();
+        $('.time').text(time.format('LTS'));
+    }, 1000)
+</script>
 <script>
 
     var chosenOption = null;
