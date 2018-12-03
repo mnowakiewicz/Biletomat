@@ -372,10 +372,10 @@
         $(".button-remove").addClass('disabled');
         $('#main-option-1, #main-option-2').click(function () {
             window.mainOption = $(this).attr('id');
+            window.mainElement = this;
             showTicketBuyOptions();
             removeSelectedOptions();
             setupOptionsTickets();
-            window.mainElement = this;
             checkDownUpButtonsConditions();
             $(this).addClass('blue darken-2');
         });
