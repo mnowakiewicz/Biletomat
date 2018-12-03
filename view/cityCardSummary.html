@@ -452,9 +452,9 @@
         window.chosenTable.forEach(function (el) {
             if(el.linia == window.description){
                 if(window.mainOption == "main-option-1"){
-                    var price = el[1];
-                } else {
                     var price = el[2];
+                } else {
+                    var price = el[1];
                 }
                 option = window.option;
                 var title = option.option.charAt(0).toUpperCase() + option.option.substr(1);
