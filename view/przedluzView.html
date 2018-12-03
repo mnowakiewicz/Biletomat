@@ -131,15 +131,30 @@
         /*.table-payment {*/
         /*height: 500px;*/
         /*}*/
+
+        .clocl {
+            margin-top: 25px;
+        }
+
+        .time {
+            margin-left: 22px;
+        }
+        .time, .date {
+            font-size: 35px;
+            color: black;
+        }
     </style>
 </head>
 <body class="teal lighten-4">
 <div class="row" id="logo-row">
     <div class="col s2">
-        <img src="../imageedit_4_7935784377.png">
+        <img src="../imageedit_4_7935784377(1).png">
     </div>
     <div class="col s2 offset-s3">
-        <p class="time white-text"></p>
+        <div class="clocl">
+            <span class="time"></span>
+            <span class="date"></span>
+        </div>
     </div>
     <div class="col s1 offset-s2">
         <button class="btn-floating btn-large waves-effect waves-light blue button-back z-depth-3" ><i class="material-icons">keyboard_backspace</i></button>
@@ -180,7 +195,8 @@
 </div>
 <script>
     var time = moment();
-    $('.time').text(time.format('LTS'));
+    $('.time').text(time.format('LTS'));;
+    $('.date').text(time.format('DD.MM.YYYY'))
     setInterval(function () {
         var time = moment();
         $('.time').text(time.format('LTS'));
