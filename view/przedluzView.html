@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+    <title>Biletomat</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+
+    <!-- scripts -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script>if (window.module) module = window.module;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        /*body {*/
+        /*font-family: 'Abel', sans-serif;*/
+        /*}*/
+
+        #logo-row {
+            margin-bottom: 0px;
+        }
+
+        #btn-4-mies, #btn-5-mies {
+            width: 100%;
+            height: 200px;
+            color: black;
+            font-size: 10px;
+        }
+
+        .description-card {
+            font-size: 17px;
+        }
+
+        #main-option-1, #main-option-2 {
+            font-size: 19px;
+        }
+        #logo-row .btn-large, #button-pay {
+            width: 100%;
+            height: 70px;
+            color: black;
+            font-size: 20px;
+        }
+
+        #steps, #table-payment {
+            padding-right: 30px;
+
+        }
+
+        #table-payment .card {
+            margin: 0 0 0;
+        }
+
+        #steps {
+            padding-top: 30px;
+            font-size: 30px;
+        }
+        img {
+            width: 80%;
+        }
+
+        .card-content {
+            text-align: center;
+        }
+
+        .title-card {
+            font-size: 18px;
+        }
+
+        .second-button {
+            margin-top: 10px;
+        }
+
+        .blue {
+            color: white;
+        }
+
+        .rows-metropolitarny .button-add {
+            margin-top: 10%;
+            margin-left: 5%;
+        }
+
+        .button-add {
+            margin-top: 0;
+            margin-left: 5%;
+        }
+
+        .button-remove {
+            display: block;
+            margin-left: 5%;
+            margin-top: 20%;
+        }
+
+        #button-pay {
+            width: 100%;
+        }
+
+
+        .rows-options h5 {
+            height: 84px;
+            line-height: 3.5;
+            margin-right: 10px
+
+        }
+
+        .rows-options {
+            display: none;
+        }
+
+        .rows-options .row {
+            margin-bottom: 0;
+        }
+
+        #btn-down {
+            margin-top: 80px;
+        }
+
+        tbody th {
+            font-weight: normal;
+        }
+
+        .button-back {
+            margin-top: 40px;
+            margin-left: 10px;
+            width: 80px!important;
+            height: 80px!important;
+        }
+        /*.table-payment {*/
+        /*height: 500px;*/
+        /*}*/
+    </style>
+</head>
+<body class="teal lighten-4">
+<div class="row" id="logo-row">
+    <div class="col s2">
+        <img src="../imageedit_4_7935784377.png">
+    </div>
+    <div class="col s1 offset-s7">
+        <button class="btn-floating btn-large waves-effect waves-light blue button-back z-depth-3" ><i class="material-icons">keyboard_backspace</i></button>
+    </div>
+    <div class="col s2" id="steps">
+        <div class="card z-depth-5">
+            <div class="card-content">
+                <p>Krok <b>3/5</b></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s4 offset-s4" id="table-payment">
+        <div class="card z-depth-5">
+            <div class="card-content">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Bilet</th>
+                        <th>Typ</th>
+                        <th>Cena[zł]</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Miesięczny[Grudzień] - nocne, pośpieszne i zwykłe w granicach Gdynii</th>
+                        <th>Ulgowy</th>
+                        <th>47</th>
+                    </tr>
+                    </tbody>
+                </table>
+                <button id="button-pay" class="btn-large  blue darken-2 waves-effect waves-light z-depth-5 white-text">ZAPŁAĆ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    var semestralne = [
+        {
+            'linia': "Zwykłe w granicach Gdynii",
+            1: 156,
+            2: 195
+        },
+        {
+            'linia': "Nocne, pospieszne i zwykłe w granicach Gdynii",
+            1: 179,
+            2: 223
+        },
+        {
+            'linia': "Nocne, pospieszne i zwykłe w granicach Sopotu / Rumii / Gm. Kosakowo / Gm. Żukowo / Gm. Szemud / Gm. Wejherowo",
+            1: 122,
+            2: 152
+        },
+        {
+            'linia': "Nocne, pospieszne i zwykłe w granicach Rumi, Redy i miasta Wejherowa / Gm. Wejherowo i Rumii",
+            1: 160,
+            2: 200
+        },
+        {
+            'linia': "Nocne, pospieszne i zwykłe w obrębie sieci komunikacyjnej [w tym linie G, N1, 101 i 171]",
+            1: 160,
+            2: 200
+        },
+    ];
+
+    var miesieczne30Dniowe = [
+        {
+            'linia': "Zwykłe w granicach Gdynii",
+            1: 36,
+            2: 41
+        },
+        {
+            'linia': "Nocne, pospieszne i zwykłe w granicach Gdyni",
+            1: 43,
+            2: 47
+        },
+        {
+            'linia': "Nocne, pospieszne i zwykłe w granicach Sopotu / Rumii / Gm. Kosakowo / Gm. Żukowo / Gm. Szemud / Gm. Wejherowo",
+            1:29,
+            2: 32
+        },
+        {
+            'linia': "Nocne, pospieszne i zwykłe w granicach Rumi, Redy i miasta Wejherowa / Gm. Wejherowo i Rumi",
+            1:37,
+            2:42
+        },
+        {
+            'linia': "Nocne, pospieszne i zwykłe w obrębie sieci komunikacyjnej [w tym linie G, N1, 101 i 171]",
+            1:48,
+            2:52
+        },
+    ];
+    var option = {
+        'option': 'miesieczny',
+        'month': 'Grudzień',
+        'date': null
+    };
+    var chosenTable = miesieczne30Dniowe;
+    //przedluz
+    //semestralny
+    //miesieczny
+    //30dniowy
+    var mainOption;
+    $(function () {
+        var ipcRenderer = require('electron').ipcRenderer;
+
+        ipcRenderer.on('get:cityCardOption:replay', (event, arg) => {
+            window.option = arg;
+            setupOptions();
+        });
+        ipcRenderer.send('get:cityCardOption');
+        // setupOptions();
+
+        $(".button-back").click(function () {
+            var ipcRenderer = require('electron').ipcRenderer;
+            ipcRenderer.send('back:cityCard');
+        });
+
+        $('#button-pay').click(function () {
+            if(!$(this).hasClass('disabled')){
+                console.log(window.outcomeCard);
+                var ipcRenderer = require('electron').ipcRenderer;
+                ipcRenderer.send('tickets:pay', window.outcomeCard, 'kartaMiejska');
+            }
+        })
+    });
+    var outcomeCard = 47;
+
+    function setupOptions() {
+        if(window.option.option == 'semestralny'){
+            window.chosenTable = window.semestralne;
+            $('#main-option-1').find('.card-content').append("<p>Ulgowy 4-miesięczny</p>\n" +
+                "                        <p>ważny we wszystkie dni tygodnia</p>\n" +
+                "                        <p>01.10-31.01 lub 01.02-31.05</p>");
+            $('#main-option-2').find('.card-content').append("<p>Ulgowy 5-miesięczny</p>\n" +
+                "                        <p>ważny we wszystkie dni tygodnia</p>\n" +
+                "                        <p>01.09-31.01 lub 01.02-30.06</p>");
+        } else if (window.option.option == 'miesieczny' || window.option.option == '30 dniowy'){
+            window.chosenTable = window.miesieczne30Dniowe;
+            $('#main-option-1').find('.card-content').append("<p>Ulgowy "+window.option.option+", ważny od poniedziałku do piątku</p>");
+            $('#main-option-2').find('.card-content').append("<p>Ulgowy "+window.option.option+", ważny we wszystkie dni tygodnia</p>");
+        }
+    }
+    var mainElement;
+</script>
+</body>
+</html>

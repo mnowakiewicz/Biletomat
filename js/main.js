@@ -88,7 +88,11 @@ ipcMain.on('tickets:pay', function (e, outcome, rodzaj = null) {
 var cityCardOption;
 ipcMain.on('cards:next', function (e, option) {
     cityCardOption = option;
-    mainWindow.loadFile('view/cityCardSummary.html')
+    if(option.option == 'przedluż'){
+        mainWindow.loadFile('view/przedluzView.html')
+    } else {
+        mainWindow.loadFile('view/cityCardSummary.html')
+    }
 });
 
 ipcMain.on('get:cityCardOption', (event, arg) => {
