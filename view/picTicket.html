@@ -111,7 +111,7 @@
     ipcRenderer.on('get:outcome:replay', (event, arg, arg2) => {
         var messType = arg2;
         if(messType == 'kartaMiejska'){
-            $('.card-content h3').remove();
+            $('.card-content h3').text('Odbierz kartê!');
             $('#steps b').text('5/5');
         }
     });
