@@ -1,4 +1,4 @@
-## How to run project
+## How to run
 ```bash
 # Go into the repository
 cd Biletomat
